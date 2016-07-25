@@ -10,6 +10,33 @@ $(document).ready(function() {
     switchStatus(linkID);
   });
 
+
+  $('.search').delegate('#active', 'click', function() {
+    $('.act-link').show();
+    $('.inact-link').hide();
+  });
+
+  $('.search').delegate('#inactive', 'click', function() {
+    $('.act-link').hide();
+    $('.inact-link').show();
+  });
+
+  $('.search').delegate('#all', 'click', function() {
+    $('.act-link').show();
+    $('.inact-link').show();
+  });
+
+  $('.search').delegate('#alpha', 'click', function() {
+    var divs = $('.links-box > div')
+    var alphabetical = divs.sort(function (a, b) {
+        return $(a).find("span").text() > $(b).find("span").text();
+    });
+    link_list.html('');
+    link_list.html(alphabetical);
+  });
+
+
+
 function switchStatus(linkId){
   $.ajax({
     type: 'GET',
@@ -65,16 +92,6 @@ jQuery.expr[':'].contains = function(a, i, m) {
 
 
 
-
-function deleteIdea(ideaId){
-  $.ajax({
-    type: 'DELETE',
-    url: '/api/v1/ideas/' + ideaId,
-    success: function(idea) {
-      $("tr#idea_" + idea.id).remove();
-    }
-  });
-}
 function clearInputFields(title, body, tags){
   url.val("");
   title.val("");

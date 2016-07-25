@@ -7,7 +7,26 @@ body {
   color: white;
 }
 
+.act-butt {
+  height: 40px;
+  border-radius: 5px;
+  background-color: transparent;
+  border: navy 1px solid;
+  color: navy;
+  text-transform: uppercase;
+  font-size: 12px;
+  float: left;
+  margin: 0px 5px;
+  font-weight: bold;
+}
+
+.act-butt:dark {
+  background-color: teal;
+  color: white;
+}
+
 .search {
+  margin-left: 25px;
   width: 97%;
   text-align: right;
 }
