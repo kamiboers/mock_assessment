@@ -27,5 +27,6 @@ RSpec.feature "User Sign-Up", :type => :feature do
     visit '/login'
 
     expect(current_path).to eq('/dashboard')
+  end
     
   end
