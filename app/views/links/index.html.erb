@@ -1,13 +1,18 @@
-
+<div class='container' id='surround'>
+<div class='center'>
 <h1>Links Index</h1>
 <%= render 'new' %>
+</div>
 <div class="links-box">
 <% @links.each do |l| %>
 <div class="link-card" id="link-<%= l.id %>">
 <h4><%= l.title %></h4>
-<%= l.url %><br><%= l.status %>
+<span><%= l.url %></span><br>
 <button class="status-button" id="stat-<%= l.id %>">Change Status</button>
 </div>
 <% end %>
 </div>
+<div id='logout'>
 <%= link_to 'Log Out', logout_path %>
+</div>
+</div>

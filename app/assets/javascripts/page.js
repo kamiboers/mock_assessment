@@ -25,7 +25,9 @@ function replaceDivContents(link){
   var link_div = $("div#link-" + link.id);
   link_div.html("");
   (link.status == "unread") ? (buttonText = "Mark as Read") : (buttonText = "Mark as Unread");
-  link_div.html("<h4>" + link.title + "</h4>" + link.url + "<br>" + link.status + "<button class='status-button' id='stat-" + link.id + "'>" + buttonText + "</button>");
+  (link.status == "unread") ? (linkStyle="act-link") : (linkStyle="inact-link");
+  link_div.html("<h4>" + link.title + "</h4><span class='" + linkStyle + "'>" + link.url + "</span><br><button class='status-button' id='stat-" + link.id + "'>" + buttonText + "</button>");
+
 }
 
 
@@ -45,7 +47,8 @@ function getLinks(){
 
 function prependFullDiv(link){
   (link.status == "unread") ? (buttonText = "Mark as Read") : (buttonText = "Mark as Unread");
-  link_list.prepend("<div class='link-card' id='link-" + link.id + "'><h4>" + link.title + "</h4>" + link.url + "<br>" + link.status + "<button class='status-button' id='stat-" + link.id + "'>" + buttonText + "</button></div>");
+  (link.status == "unread") ? (linkStyle="act-link") : (linkStyle="inact-link");
+  link_list.prepend("<div class='link-card' id='link-" + link.id + "'><h4>" + link.title + "</h4><span class='" + linkStyle + "'>" + link.url + "</span><br><button class='status-button' id='stat-" + link.id + "'>" + buttonText + "</button></div>");
 }
 
 

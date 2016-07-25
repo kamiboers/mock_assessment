@@ -1,10 +1,13 @@
+  <h3>Create a New Link:</h3>
+  <div class='form-box'>
   <%= form_for(@link) do |f| %>
 
       <%= f.label :url %>
-      <%= f.text_field :url %>
+      <%= f.text_field :url, class: 'not-as-hideous' %>
 
       <%= f.label :title %>
-      <%= f.text_field :title %>
+      <%= f.text_field :title, class: 'not-as-hideous' %>
 
-      <%= f.submit "Create Link" %>
+      <%= f.submit "Create Link", class: 'not-as-hideous-butt' %>
     <% end %>
+  </div>
