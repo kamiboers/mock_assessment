@@ -1,0 +1,10 @@
+  <%= form_for(@link) do |f| %>
+
+      <%= f.label :url %>
+      <%= f.email_field :url %>
+
+      <%= f.label :title %>
+      <%= f.password_field :title %>
+
+      <%= f.submit "Create Link" %>
+    <% end %>

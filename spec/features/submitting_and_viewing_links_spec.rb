@@ -1,34 +1,32 @@
 require "rails_helper"
 
 RSpec.feature "Links CRUD", :type => :feature do
-    demo_email = 'me@gmail.com'
-    demo_pw = 'secret'
-    user = User.create!(email: demo_email, password: demo_pw)
-    allow(controller).to receive(:current_user).and_return(user)
 
   scenario "logged in user views links" do
+    user = User.create(email: "example@test.com", password: "test")
+    allow_any_instance_of(ApplicationController).to_receive(:current_user).and_return(user)
     visit '/'
 
     expect(current_path).to eq('/')
     expect(page).to have_content('Links Index')
   end
 
-  # scenario "logged in user adds links" do
-  #   visit '/'
+  scenario "logged in user adds links" do
+    visit '/'
 
-  #   fill_in :link_url, with: 'http://www.link.com'
-  #   fill_in :link_title, with: 'TITLE'
-  #   click_on 'Submit Link'
+    fill_in :link_url, with: 'http://www.link.com'
+    fill_in :link_title, with: 'TITLE'
+    click_on 'Submit Link'
 
-  #   expect(Link.count).to eq(1)
-  #   expect(Link.first.title).to eq('TITLE')
-  #   expect(Link.first.status).to eq(false)
+    expect(Link.count).to eq(1)
+    expect(Link.first.title).to eq('TITLE')
+    expect(Link.first.status).to eq(false)
 
-      # visit '/'
-  # expect(page).to have_content('TITLE')
-  # expect(page).to have_content('http://www.link.com')
+      visit '/'
+  expect(page).to have_content('TITLE')
+  expect(page).to have_content('http://www.link.com')
       
-  # end
+  end
 
   # scenario "invalid uri rejected" do
   #   visit '/'
