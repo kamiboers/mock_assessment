@@ -10,7 +10,6 @@ $(document).ready(function() {
     switchStatus(linkID);
   });
 
-
   $('.search').delegate('#active', 'click', function() {
     $('.act-link').show();
     $('.inact-link').hide();
@@ -35,7 +34,9 @@ $(document).ready(function() {
     link_list.html(alphabetical);
   });
 
-
+  link_list.delegate('.edit-button', 'click', function() {
+    this.parentElement.contentEditable='true';
+  });
 
 function switchStatus(linkId){
   $.ajax({
@@ -53,7 +54,7 @@ function replaceDivContents(link){
   link_div.html("");
   (link.status == "unread") ? (buttonText = "Mark as Read") : (buttonText = "Mark as Unread");
   (link.status == "unread") ? (linkStyle="act-link") : (linkStyle="inact-link");
-  link_div.html("<span class='" + linkStyle + "'>" + link.title + "<br>" +link.url + "</span><br><button class='status-button' id='stat-" + link.id + "'>" + buttonText + "</button>");
+  link_div.html("<span class='" + linkStyle + "'><div id='title_" + link.id + "'>" + link.title + "</div><div id='url_" + link.id + "'>" + link.url + "</div></span><button class='edit-button'>Edit</button><button class='status-button' id='stat-" + link.id + "'>" + buttonText + "</button>");
   link_div.toggleClass('act-link');
   link_div.toggleClass('inact-link');
 
@@ -71,10 +72,11 @@ function getLinks(){
   });
 }
 
+
 function prependFullDiv(link){
   (link.status == "unread") ? (buttonText = "Mark as Read") : (buttonText = "Mark as Unread");
   (link.status == "unread") ? (linkStyle="act-link") : (linkStyle="inact-link");
-  link_list.prepend("<div class='link-card " + linkStyle + "' id='link-" + link.id + "'><span class='" + linkStyle + "'>" + link.title + "<br>" + link.url + "</span><br><button class='status-button' id='stat-" + link.id + "'>" + buttonText + "</button></div>");
+  link_list.prepend("<div class='link-card " + linkStyle + "' id='link-" + link.id + "'><span class='" + linkStyle + "'><div id='title_" + link.id + "'>" + link.title + "</div><div id='url_" + link.id + "'>" + link.url + "</div></span><button class='edit-button'>Edit</button><button class='status-button' id='stat-" + link.id + "'>" + buttonText + "</button></div>");
 }
 
 function filter(element) {
@@ -90,13 +92,37 @@ jQuery.expr[':'].contains = function(a, i, m) {
   return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0; 
 };
 
+document.addEventListener('keydown', function (event) {
+  var esc = event.which == 27,
+  nl = event.which == 13,
+  el = event.target,
+  input = el.nodeName != 'INPUT' && el.nodeName != 'TEXTAREA',
+  data = {};
 
+  if (input) {
+    if (esc) {
+      document.execCommand('undo');
+      el.blur();
+    } else if (nl) {
+      data['contents'] = el.innerText;
+      data['id'] = el.id;
+      $.ajax({
+        type: 'get',
+        url: '/api/v1/save/' + el.id,
+        data: data,
+        error: function (request, status, error) {
+        $('#flash').html('Invalid URL. Try again.')
+        }
+      });
+      el.blur();
+      event.preventDefault();
+    }
+  }
+}, true);
 
 function clearInputFields(title, body, tags){
   url.val("");
   title.val("");
 }
-
-
 
 });
