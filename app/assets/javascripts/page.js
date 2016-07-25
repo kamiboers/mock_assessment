@@ -26,11 +26,11 @@ function replaceDivContents(link){
   link_div.html("");
   (link.status == "unread") ? (buttonText = "Mark as Read") : (buttonText = "Mark as Unread");
   (link.status == "unread") ? (linkStyle="act-link") : (linkStyle="inact-link");
-  link_div.html("<h4>" + link.title + "</h4><span class='" + linkStyle + "'>" + link.url + "</span><br><button class='status-button' id='stat-" + link.id + "'>" + buttonText + "</button>");
+  link_div.html("<span class='" + linkStyle + "'>" + link.title + "<br>" +link.url + "</span><br><button class='status-button' id='stat-" + link.id + "'>" + buttonText + "</button>");
+  link_div.toggleClass('act-link');
+  link_div.toggleClass('inact-link');
 
 }
-
-
 
 function getLinks(){
   $.ajax({
@@ -44,12 +44,26 @@ function getLinks(){
   });
 }
 
-
 function prependFullDiv(link){
   (link.status == "unread") ? (buttonText = "Mark as Read") : (buttonText = "Mark as Unread");
   (link.status == "unread") ? (linkStyle="act-link") : (linkStyle="inact-link");
-  link_list.prepend("<div class='link-card' id='link-" + link.id + "'><h4>" + link.title + "</h4><span class='" + linkStyle + "'>" + link.url + "</span><br><button class='status-button' id='stat-" + link.id + "'>" + buttonText + "</button></div>");
+  link_list.prepend("<div class='link-card " + linkStyle + "' id='link-" + link.id + "'><span class='" + linkStyle + "'>" + link.title + "<br>" + link.url + "</span><br><button class='status-button' id='stat-" + link.id + "'>" + buttonText + "</button></div>");
 }
+
+$('#create_idea').click(function() {
+    var title = $('#link_title');
+    var url = $('#link_url');
+    var linkAttributes = { link: { title: title.val(), url: url.val(), tag_names: tags.val() } }
+    $.ajax({
+      type: 'POST',
+      url: '/api/v1/ideas',
+      data: ideaAttributes,
+      success: function(idea) {
+        prependFullRow(idea);
+        clearInputFields(title, body, tags);
+      }
+    });
+  });
 
 
 

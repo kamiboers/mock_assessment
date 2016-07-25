@@ -7,7 +7,6 @@ class Api::V1::LinksController < Api::V1::BaseController
   # def create
   #   idea = Idea.new(idea_params)
   #   if idea.save
-  #     IdeaTagAssociator.call(idea.id, params[:idea][:tag_names])
   #     render json: idea
   #   end
   # end
