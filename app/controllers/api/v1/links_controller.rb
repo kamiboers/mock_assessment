@@ -1,8 +1,8 @@
 class Api::V1::LinksController < Api::V1::BaseController
 
-  # def index
-  #   render json: Idea.order(created_at: :asc)
-  # end
+  def index
+    render json: Link.order(created_at: :asc)
+  end
 
   # def create
   #   idea = Idea.new(idea_params)
@@ -15,6 +15,7 @@ class Api::V1::LinksController < Api::V1::BaseController
   def update
     link = Link.find_by(id: params[:id])
     link.toggle(:status)
+    link.save!
     render json: link
   end
 

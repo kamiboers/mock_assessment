@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post '/signup' => 'users#create'
   get '/dashboard' => 'pages#dashboard', as: :dashboard
   get '/logout' => 'sessions#destroy'
+  get '/api/v1/links/' => 'api/v1/links#index'
   get '/api/v1/links/:id' => 'api/v1/links#update'
 
 resources :users, only: [:new, :create, :show]
