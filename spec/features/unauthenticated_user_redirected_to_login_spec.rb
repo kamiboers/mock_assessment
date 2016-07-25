@@ -14,15 +14,13 @@ RSpec.feature "User Sign-Up", :type => :feature do
     demo_pw = 'secret'
   
     visit '/welcome'
-
     click_on 'Sign Up'
-
     fill_in 'user_email', with: demo_email
     fill_in 'user_password', with: demo_pw
     fill_in 'user_password_confirmation', with: demo_pw
+    click_on 'Create Account'
 
-    expect(page).to have_content('Thanks for signing up!')
-    expect(current_path).to eq('/dashboard')
+    expect(current_path).to eq('/')
     expect(User.count).to eq(1)
 
   end

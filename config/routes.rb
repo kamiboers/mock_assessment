@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   post '/signup' => 'users#create'
   get '/dashboard' => 'pages#dashboard', as: :dashboard
 
-  resources :users
+  resources :users, only: [:new, :create]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
