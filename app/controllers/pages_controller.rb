@@ -1,11 +1,10 @@
 class PagesController < ApplicationController
  
  def index
-  redirect_to '/login' if !current_user
+  redirect_to '/welcome' if !current_user
  end
 
- def login
-  @user = User.new
+ def welcome
  end
   
 end
