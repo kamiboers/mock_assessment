@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/logout' => 'sessions#destroy'
   get '/api/v1/links/' => 'api/v1/links#index'
   get '/api/v1/links/:id' => 'api/v1/links#update'
+  get '/api/v1/save/:id' => 'api/v1/links#save'
 
 resources :users, only: [:new, :create, :show]
 resources :links

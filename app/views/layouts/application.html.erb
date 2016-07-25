@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div>
+<div id="flash">
   <%= flash[:success] unless flash[:success].blank? %>
   <%= flash[:error] unless flash[:error].blank? %>
 </div>

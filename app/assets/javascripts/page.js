@@ -10,6 +10,10 @@ $(document).ready(function() {
     switchStatus(linkID);
   });
 
+  link_list.delegate('.edit-button', 'click', function() {
+    this.parentElement.contentEditable='true';
+  });
+
 function switchStatus(linkId){
   $.ajax({
     type: 'GET',
@@ -26,11 +30,11 @@ function replaceDivContents(link){
   link_div.html("");
   (link.status == "unread") ? (buttonText = "Mark as Read") : (buttonText = "Mark as Unread");
   (link.status == "unread") ? (linkStyle="act-link") : (linkStyle="inact-link");
-  link_div.html("<h4>" + link.title + "</h4><span class='" + linkStyle + "'>" + link.url + "</span><br><button class='status-button' id='stat-" + link.id + "'>" + buttonText + "</button>");
+  link_div.html("<span class='" + linkStyle + "'><div id='title_" + link.id + "'>" + link.title + "</div><div id='url_" + link.id + "'>" + link.url + "</div></span><button class='edit-button'>Edit</button><button class='status-button' id='stat-" + link.id + "'>" + buttonText + "</button>");
+  link_div.toggleClass('act-link');
+  link_div.toggleClass('inact-link');
 
 }
-
-
 
 function getLinks(){
   $.ajax({
@@ -48,8 +52,37 @@ function getLinks(){
 function prependFullDiv(link){
   (link.status == "unread") ? (buttonText = "Mark as Read") : (buttonText = "Mark as Unread");
   (link.status == "unread") ? (linkStyle="act-link") : (linkStyle="inact-link");
-  link_list.prepend("<div class='link-card' id='link-" + link.id + "'><h4>" + link.title + "</h4><span class='" + linkStyle + "'>" + link.url + "</span><br><button class='status-button' id='stat-" + link.id + "'>" + buttonText + "</button></div>");
+  link_list.prepend("<div class='link-card " + linkStyle + "' id='link-" + link.id + "'><span class='" + linkStyle + "'><div id='title_" + link.id + "'>" + link.title + "</div><div id='url_" + link.id + "'>" + link.url + "</div></span><button class='edit-button'>Edit</button><button class='status-button' id='stat-" + link.id + "'>" + buttonText + "</button></div>");
 }
+
+document.addEventListener('keydown', function (event) {
+  var esc = event.which == 27,
+  nl = event.which == 13,
+  el = event.target,
+  input = el.nodeName != 'INPUT' && el.nodeName != 'TEXTAREA',
+  data = {};
+
+  if (input) {
+    if (esc) {
+      document.execCommand('undo');
+      el.blur();
+    } else if (nl) {
+      data['contents'] = el.innerText;
+      data['id'] = el.id;
+      $.ajax({
+        type: 'get',
+        url: '/api/v1/save/' + el.id,
+        data: data,
+        error: function (request, status, error) {
+        $('#flash').html('Invalid URL. Try again.')
+        }
+      });
+      el.blur();
+      event.preventDefault();
+    }
+  }
+}, true);
+
 
 
 
