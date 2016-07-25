@@ -1,0 +1,150 @@
+body {
+  background-color: #343d46;
+  font-family: 'Helvetica', sans-serif;
+}
+
+#flash {
+  color: white;
+}
+
+.act-butt {
+  height: 40px;
+  border-radius: 5px;
+  background-color: transparent;
+  border: navy 1px solid;
+  color: navy;
+  text-transform: uppercase;
+  font-size: 12px;
+  float: left;
+  margin: 0px 5px;
+  font-weight: bold;
+}
+
+.act-butt:dark {
+  background-color: teal;
+  color: white;
+}
+
+.search {
+  margin-left: 25px;
+  width: 97%;
+  text-align: right;
+}
+
+.welcome {
+  text-align: center;
+  width: 50%;
+  padding: 25px;
+  border-radius: 15px;
+  background-color: white;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10%;
+}
+
+.links-box {
+  overflow-y: scroll;
+  margin: 15px;
+}
+
+.link-card {
+  padding: 10px;
+  border: .5px gray solid;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+div.act-link {
+  background-color: #76a297;
+}
+div.inact-link {
+  background-color: #3e5b5b;
+}
+
+.not-as-hideous {
+  height: 30px;
+  width: 200px;
+  border-radius: 5px;
+  border: black 1px solid;
+  font-size: 18px;
+  color: #343d46;
+  padding: 5px;
+}
+
+.not-as-hideous-butt {
+  height: 40px;
+  width: 120px;
+  border-radius: 5px;
+  background-color: transparent;
+  border: green 1px solid;
+  color: green;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+
+h1 {
+  color: #343d46;
+  font-size: 60px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.center {
+  width: 100%;
+  text-align: center;
+}
+
+a, a:visited {
+  color: navy;
+  font-weight: bold;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+a:hover {
+  color: teal;
+}
+
+.surround {
+  padding: 25px;
+  margin: 25px;
+  border-radius: 15px;
+  background-color: white;
+}
+
+#logout {
+   position:absolute;
+   height:30px;
+   width: 90%;
+   text-align: right;
+}
+
+.form-box {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.act-link {
+  text-decoration: none;
+}
+
+.inact-link {
+  text-decoration: line-through;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+ */
+
