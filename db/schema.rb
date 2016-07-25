@@ -19,9 +19,9 @@ ActiveRecord::Schema.define(version: 20160725182248) do
   create_table "links", force: :cascade do |t|
     t.string   "url"
     t.string   "title"
-    t.boolean  "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "status",     default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "user_id"
   end
 

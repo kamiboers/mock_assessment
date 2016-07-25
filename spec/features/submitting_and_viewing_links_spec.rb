@@ -12,15 +12,17 @@ RSpec.feature "Links CRUD", :type => :feature do
   end
 
   scenario "logged in user adds links" do
+    user = User.create(email: "example@test.com", password: "test")
+    ApplicationController.any_instance.stub(:current_user).and_return(user)
     visit '/'
 
     fill_in :link_url, with: 'http://www.link.com'
     fill_in :link_title, with: 'TITLE'
-    click_on 'Submit Link'
+    click_on 'Create Link'
 
     expect(Link.count).to eq(1)
     expect(Link.first.title).to eq('TITLE')
-    expect(Link.first.status).to eq(false)
+    expect(Link.first.status).to eq('unread')
 
       visit '/'
   expect(page).to have_content('TITLE')
@@ -28,16 +30,18 @@ RSpec.feature "Links CRUD", :type => :feature do
       
   end
 
-  # scenario "invalid uri rejected" do
-  #   visit '/'
+  scenario "invalid uri rejected" do
+    user = User.create(email: "example@test.com", password: "test")
+    ApplicationController.any_instance.stub(:current_user).and_return(user)
+    visit '/'
 
-  #   fill_in :link_url, with: ':/clearlynotalink.com'
-  #   fill_in :link_title, with: 'TITLE'
-  #   click_on 'Submit Link'
+    fill_in :link_url, with: ':/clearlynotalink.com'
+    fill_in :link_title, with: 'TITLE'
+    click_on 'Create Link'
 
-  # expect(page).to have_content('Link is invalid.')
-  #   expect(Link.count).to eq(0)
-  # end
+  expect(page).to have_content('Link is invalid.')
+    expect(Link.count).to eq(0)
+  end
 
 
 end

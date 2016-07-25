@@ -3,7 +3,7 @@ class CreateLinks < ActiveRecord::Migration
     create_table :links do |t|
       t.string :url
       t.string :title
-      t.boolean :status
+      t.boolean :status, default: false
 
       t.timestamps null: false
     end

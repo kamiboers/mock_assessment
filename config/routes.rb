@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   root 'links#index'
 
   get '/welcome' => 'pages#welcome'

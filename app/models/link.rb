@@ -3,6 +3,7 @@ require 'uri'
 class Link < ActiveRecord::Base
   belongs_to :user
   
-  validates :url, :format => URI::regexp(%w(http https)), uniqueness: true
+  validates :url, :url => true, uniqueness: true
+  enum status: { unread: false, read: true }
 
 end
