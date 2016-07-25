@@ -4,7 +4,7 @@ RSpec.feature "Links CRUD", :type => :feature do
 
   scenario "logged in user views links" do
     user = User.create(email: "example@test.com", password: "test")
-    allow_any_instance_of(ApplicationController).to_receive(:current_user).and_return(user)
+    ApplicationController.any_instance.stub(:current_user).and_return(user)
     visit '/'
 
     expect(current_path).to eq('/')
@@ -35,6 +35,7 @@ RSpec.feature "Links CRUD", :type => :feature do
   #   fill_in :link_title, with: 'TITLE'
   #   click_on 'Submit Link'
 
+  # expect(page).to have_content('Link is invalid.')
   #   expect(Link.count).to eq(0)
   # end
 

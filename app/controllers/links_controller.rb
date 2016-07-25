@@ -5,4 +5,8 @@ class LinksController < ApplicationController
   redirect_to '/welcome' if !current_user
  end
 
+ def new
+  binding.pry
+end
+
 end
