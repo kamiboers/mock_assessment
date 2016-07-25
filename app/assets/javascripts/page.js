@@ -50,20 +50,19 @@ function prependFullDiv(link){
   link_list.prepend("<div class='link-card " + linkStyle + "' id='link-" + link.id + "'><span class='" + linkStyle + "'>" + link.title + "<br>" + link.url + "</span><br><button class='status-button' id='stat-" + link.id + "'>" + buttonText + "</button></div>");
 }
 
-$('#create_idea').click(function() {
-    var title = $('#link_title');
-    var url = $('#link_url');
-    var linkAttributes = { link: { title: title.val(), url: url.val(), tag_names: tags.val() } }
-    $.ajax({
-      type: 'POST',
-      url: '/api/v1/ideas',
-      data: ideaAttributes,
-      success: function(idea) {
-        prependFullRow(idea);
-        clearInputFields(title, body, tags);
-      }
-    });
-  });
+function filter(element) {
+  var value = $(element).val();
+  $('.links-box > div:not(:contains(' + value + '))').hide(); 
+  $('.links-box > div:contains(' + value + ')').show(); 
+}
+
+jQuery.expr[':'].Contains = function(a, i, m) { 
+  return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0; 
+};
+jQuery.expr[':'].contains = function(a, i, m) { 
+  return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0; 
+};
+
 
 
 
@@ -80,5 +79,7 @@ function clearInputFields(title, body, tags){
   url.val("");
   title.val("");
 }
+
+
 
 });

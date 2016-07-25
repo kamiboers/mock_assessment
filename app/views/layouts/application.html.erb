@@ -13,6 +13,6 @@
 </div>
 
 <%= yield %>
-
+<script>function filter(element) {var value = $(element).val();$('.links-box > div:not(:contains(' + value + '))').hide(); $('.links-box > div:contains(' + value + ')').show(); }</script>
 </body>
 </html>

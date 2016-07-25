@@ -1,7 +1,7 @@
 class Api::V1::LinksController < Api::V1::BaseController
 
   def index
-    render json: Link.order(created_at: :asc)
+    render json: current_user.links.order(created_at: :asc)
   end
 
   # def create
@@ -12,7 +12,7 @@ class Api::V1::LinksController < Api::V1::BaseController
   # end
 
   def update
-    link = Link.find_by(id: params[:id])
+    link = current_user.links.find_by(id: params[:id])
     link.toggle(:status)
     link.save!
     render json: link
