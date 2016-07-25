@@ -1,2 +1,12 @@
+
 <h1>Links Index</h1>
+<%= render 'new' %>
+<div class="links-box">
+<% @links.each do |l| %>
+<div class="link-card" id="link-<%= l.id %>">
+<h4><%= l.title %></h4>
+<%= l.url %><br><%= l.status %>
+</div>
+<% end %>
+</div>
 <%= link_to 'Log Out', logout_path %>
