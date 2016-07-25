@@ -21,6 +21,7 @@ RSpec.feature "User Sign-Up", :type => :feature do
     click_on 'Create Account'
 
     expect(current_path).to eq('/')
+    expect(page).to have_content('Links Index')
     expect(User.count).to eq(1)
 
   end
@@ -55,13 +56,27 @@ RSpec.feature "User Sign-Up", :type => :feature do
     expect(User.count).to eq(0)
 
   end
+
+  scenario "logging in and out" do
+    demo_email = 'me@gmail.com'
+    demo_pw = 'secret'
+    User.create!(email: demo_email, password: demo_pw)
+  
+    visit '/welcome'
+    click_on 'Log In'
+
+    fill_in 'session_email', with: demo_email
+    fill_in 'session_password', with: demo_pw
+    click_on 'Log In'
+
+    expect(current_path).to eq('/')
+    expect(page).to have_content('Links Index')
+    expect(page).to have_link('Log Out')
+
+    click_on 'Log Out'
+
+    expect(current_path).to eq('/welcome')
+  end
     
   end
 
-# I cannot sign up with an email address that has already been used.
-# Password and confirmation must match.
-# Upon submitting this information, I should be logged in via a cookie and redirected to the "Links Index" page.
-
-# Sign Out
-
-# As an authenticated user viewing the index page, I should see a link to "Sign Out". This should clear my cookies and redirect me back to the login page.

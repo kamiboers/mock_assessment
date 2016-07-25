@@ -5,10 +5,10 @@ def new
 end
 
 def create
-    @user = User.find_by(email: params[:email])
+    @user = User.find_by(email: params[:session][:email])
     if @user && @user.authenticate(params[:session][:password])
       session[:user_id] = @user.id
-      redirect_to links_path
+      redirect_to '/'
     else
       flash.now[:error] = "Invalid. Try Again."
       render :new
