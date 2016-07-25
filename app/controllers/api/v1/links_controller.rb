@@ -28,10 +28,10 @@ class Api::V1::LinksController < Api::V1::BaseController
   #   render json: @idea.thumbs_down
   # end
 
-  # def save_text
-  #   @idea = Idea.find_by(id: split_params.last)
-  #   render json: @idea.update_text(split_params.first, params[:contents])
-  # end
+  def save
+    link = Link.find_by(id: params[:id].split('-').last)
+    render json: link.update_text(split_edited_content.first, split_edited_content.last)
+  end
 
   # def destroy
   #   @idea = Idea.find_by(id: params[:id])
@@ -58,8 +58,10 @@ class Api::V1::LinksController < Api::V1::BaseController
     params.require(:link).permit(:title, :url)
   end
 
-  # def split_params
-  #   params[:id].split('_')
-  # end
+  def split_edited_content
+    title = params['contents'].split("\n").first
+    url = params['contents'].split("\n")[1]
+    return [title, url]
+  end
 
 end
