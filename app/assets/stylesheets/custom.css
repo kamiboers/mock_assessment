@@ -1,0 +1,72 @@
+body {
+  background-color: #343d46;
+  font-family: 'Helvetica', sans-serif;
+}
+
+.not-as-hideous {
+  height: 30px;
+  width: 200px;
+  border-radius: 5px;
+  border: black 1px solid;
+  font-size: 18px;
+  color: #343d46;
+  padding: 5px;
+}
+
+.not-as-hideous-butt {
+  height: 30px;
+  width: 100px;
+  border-radius: 5px;
+  background-color: transparent;
+  border: green 1px solid;
+  color: green;
+  font-size: 16px;
+}
+
+h1 {
+  color: navy;
+  font-size: 60px;
+  font-weight: 600;
+}
+
+.center {
+  width: 100%;
+  text-align: center;
+}
+
+a, a:visited {
+  color: navy;
+  font-weight: bold;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+a:hover {
+  color: teal;
+}
+
+#surround {
+  padding: 25px;
+  border-radius: 15px;
+  background-color: #EAEAEA;
+}
+
+#logout {
+   position:absolute;
+   height:30px;
+   width: 95%;
+   text-align: right;
+}
+
+.form-box {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.act-link {
+  text-decoration: none;
+}
+
+.inact-link {
+  text-decoration: line-through;
+}
