@@ -1,9 +1,16 @@
-<div class='container' id='surround'>
+<div class='container surround'>
 
 <div class='center'>
 <h1>Links Index</h1>
 <%= render 'new' %>
 </div>
+
+<div class="search">
+<button id="active" class="act-butt">Active</button>
+<button id="inactive" class="act-butt">Inactive</button>
+<button id="alpha" class="act-butt">Alphabetical</button>
+<button id="all" class="act-butt">All Links</button>
+<input type="text" class="form-control not-as-hideous" placeholder="Search" onkeyup="filter(this)"></div>
 
 <div class="links-box">
 </div>

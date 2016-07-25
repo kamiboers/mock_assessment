@@ -10,6 +10,30 @@ $(document).ready(function() {
     switchStatus(linkID);
   });
 
+  $('.search').delegate('#active', 'click', function() {
+    $('.act-link').show();
+    $('.inact-link').hide();
+  });
+
+  $('.search').delegate('#inactive', 'click', function() {
+    $('.act-link').hide();
+    $('.inact-link').show();
+  });
+
+  $('.search').delegate('#all', 'click', function() {
+    $('.act-link').show();
+    $('.inact-link').show();
+  });
+
+  $('.search').delegate('#alpha', 'click', function() {
+    var divs = $('.links-box > div')
+    var alphabetical = divs.sort(function (a, b) {
+        return $(a).find("span").text() > $(b).find("span").text();
+    });
+    link_list.html('');
+    link_list.html(alphabetical);
+  });
+
   link_list.delegate('.edit-button', 'click', function() {
     this.parentElement.contentEditable='true';
   });
@@ -55,6 +79,19 @@ function prependFullDiv(link){
   link_list.prepend("<div class='link-card " + linkStyle + "' id='link-" + link.id + "'><span class='" + linkStyle + "'><div id='title_" + link.id + "'>" + link.title + "</div><div id='url_" + link.id + "'>" + link.url + "</div></span><button class='edit-button'>Edit</button><button class='status-button' id='stat-" + link.id + "'>" + buttonText + "</button></div>");
 }
 
+function filter(element) {
+  var value = $(element).val();
+  $('.links-box > div:not(:contains(' + value + '))').hide(); 
+  $('.links-box > div:contains(' + value + ')').show(); 
+}
+
+jQuery.expr[':'].Contains = function(a, i, m) { 
+  return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0; 
+};
+jQuery.expr[':'].contains = function(a, i, m) { 
+  return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0; 
+};
+
 document.addEventListener('keydown', function (event) {
   var esc = event.which == 27,
   nl = event.which == 13,
@@ -83,18 +120,6 @@ document.addEventListener('keydown', function (event) {
   }
 }, true);
 
-
-
-
-function deleteIdea(ideaId){
-  $.ajax({
-    type: 'DELETE',
-    url: '/api/v1/ideas/' + ideaId,
-    success: function(idea) {
-      $("tr#idea_" + idea.id).remove();
-    }
-  });
-}
 function clearInputFields(title, body, tags){
   url.val("");
   title.val("");
