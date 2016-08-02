@@ -3,7 +3,8 @@ require 'uri'
 class Link < ActiveRecord::Base
   belongs_to :user
   
-  validates :url, :url => true, uniqueness: true
+  validates :url, :url => true, presence: true, uniqueness: true
+  validates :title, presence: true
   enum status: { unread: false, read: true }
 
   def update_text(title, url)

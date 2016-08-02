@@ -23,11 +23,7 @@ RSpec.feature "Links CRUD", :type => :feature do
     expect(Link.count).to eq(1)
     expect(Link.first.title).to eq('TITLE')
     expect(Link.first.status).to eq('unread')
-
-      visit '/'
-  expect(page).to have_content('TITLE')
-  expect(page).to have_content('http://www.link.com')
-      
+    expect(page).to have_content('Link Saved') 
   end
 
   scenario "invalid uri rejected" do

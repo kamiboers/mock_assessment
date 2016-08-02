@@ -10,14 +10,14 @@ class Api::V1::LinksController < Api::V1::BaseController
   
   def update
     link = current_user.links.find_by(id: params[:id])
-    link.toggle(:status)
-    link.save!
+    link.toggle!(:status)
     render json: link
   end
 
   def save
     link = Link.find_by(id: params[:id].split('-').last)
-    render json: link.update_text(split_edited_content.first, split_edited_content.last)
+    link.update!(title: split_edited_content.first, url: split_edited_content.last)
+    render json: link
   end
 
   private
