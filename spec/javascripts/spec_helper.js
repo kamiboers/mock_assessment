@@ -1,9 +1,12 @@
 // Teaspoon includes some support files, but you can use anything from your own support path too.
 // require support/expect
 // require support/sinon
+//= require application
+//= require page
 //= require support/chai
 // require support/chai-jq-0.0.7
 // require support/your-support-file
+
 //
 // PhantomJS (Teaspoons default driver) doesn't have support for Function.prototype.bind, which has caused confusion.
 // Use this polyfill to avoid the confusion.

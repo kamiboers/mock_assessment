@@ -101,4 +101,12 @@ def create_link
   Link.create!(title: "example title", url: "http://www.example.com")
 end
 
+def create_current_user_with_two_links
+  user = User.create(email: "example@test.com", password: "test")
+  ApplicationController.any_instance.stub(:current_user).and_return(user)
+  user.links.create!(url: "http://www.link.com", title: 'Title')
+  user.links.create!(url: "http://www.otherlink.com", title: 'Other Title')
+  return user
+end
+
 end
