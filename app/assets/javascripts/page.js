@@ -38,6 +38,8 @@ $(document).ready(function() {
     this.parentElement.contentEditable='true';
   });
 
+});
+
 function switchStatus(linkId){
   $.ajax({
     type: 'GET',
@@ -106,13 +108,7 @@ document.addEventListener('keydown', function (event) {
     } else if (nl) {
       data['contents'] = el.innerText;
       data['id'] = el.id;
-      $.ajax({
-        type: 'get',
-        url: '/api/v1/save/' + el.id,
-        data: data,
-        error: function (request, status, error) {
-        $('#flash').html('Invalid URL. Try again.')
-        }
+      saveChanges(data);
       });
       el.blur();
       event.preventDefault();
@@ -120,9 +116,17 @@ document.addEventListener('keydown', function (event) {
   }
 }, true);
 
-function clearInputFields(title, body, tags){
+function saveChanges(data) {
+      $.ajax({
+        type: 'get',
+        url: '/api/v1/save/' + el.id,
+        data: data,
+        error: function (request, status, error) {
+        $('#flash').html('Invalid URL. Try again.')
+        }
+}
+
+function clearInputFields(){
   url.val("");
   title.val("");
 }
-
-});
