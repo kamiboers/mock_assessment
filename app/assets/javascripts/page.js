@@ -38,8 +38,6 @@ $(document).ready(function() {
     this.parentElement.contentEditable='true';
   });
 
-});
-
 function switchStatus(linkId){
   $.ajax({
     type: 'GET',
@@ -108,15 +106,6 @@ document.addEventListener('keydown', function (event) {
     } else if (nl) {
       data['contents'] = el.innerText;
       data['id'] = el.id;
-      saveChanges(data);
-      });
-      el.blur();
-      event.preventDefault();
-    }
-  }
-}, true);
-
-function saveChanges(data) {
       $.ajax({
         type: 'get',
         url: '/api/v1/save/' + el.id,
@@ -124,9 +113,16 @@ function saveChanges(data) {
         error: function (request, status, error) {
         $('#flash').html('Invalid URL. Try again.')
         }
-}
+      });
+      el.blur();
+      event.preventDefault();
+    }
+  }
+}, true);
 
-function clearInputFields(){
+function clearInputFields(title, body, tags){
   url.val("");
   title.val("");
 }
+
+});

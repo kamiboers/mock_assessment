@@ -3,6 +3,7 @@
 // require support/sinon
 //= require application
 //= require page
+//= require jquery
 //= require support/chai
 // require support/chai-jq-0.0.7
 // require support/your-support-file

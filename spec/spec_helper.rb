@@ -109,4 +109,11 @@ def create_current_user_with_two_links
   return user
 end
 
+def create_user_with_two_links
+  user = User.create(email: "user@test.com", password: "test")
+  user.links.create!(url: "http://www.link.com", title: 'Title')
+  user.links.create!(url: "http://www.otherlink.com", title: 'Other Title')
+  return user
+end
+
 end
